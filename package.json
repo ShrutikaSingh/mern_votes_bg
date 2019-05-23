@@ -3,7 +3,9 @@
   "version": "1.0.0",
   "description": "this is the server for mern-voting based app ",
   "main": "index.js",
-  "scripts": {},
+  "scripts": {
+    
+  },
   "keywords": [
     "Shrutika",
     "Singh"
