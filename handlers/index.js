@@ -13,8 +13,10 @@ module.exports.notFound=(res,req,next)=>{
 };
 
 /*
+we are getting error res.status is not a function
+
 module.exports.errors = (err,res,req,next)=> {
-    res.status(err.status || 500).json(                    //500 for any diff error
+    res.status(err.status || 400).json(               //500 for any diff error like our server is broken //400 is standard error code it means something went wrong
         {
             err: err.message || 'Something went wrong'
          }
@@ -22,3 +24,4 @@ module.exports.errors = (err,res,req,next)=> {
 
 };
 */
+
