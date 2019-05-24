@@ -12,9 +12,9 @@ try{
 res.status(201).json({id,username});//200 for default ok //201 means somthing has been created
 }
 catch(err){
-  /*(if(err.code===11000){
+  if(err.code===11000){
       err.message='sorry, that user already exists';
-  } */
+  }
     next(err);
  }
 };
