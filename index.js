@@ -3,7 +3,8 @@ require('dotenv').config()//create private variables that u dont want to share o
 //create server
 
 const express = require('express');
-const port= 5000;   //const port= process.env.PORT; //it will take the PORT variable from .env
+//const port= 5000;   //
+const port= process.env.PORT; //it will take the PORT variable from .env
 
 const cors=require('cors');
 const bodyParser=require('body-parser');
