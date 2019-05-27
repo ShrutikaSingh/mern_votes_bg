@@ -7,9 +7,9 @@ module.exports = {
 
 //next is ver imp to errors
 module.exports.notFound=(res,req,next)=>{
- const err=new Error('not found,we are  in handlers/INDEX.js');
+ const err=new Error('not found');
  err.status=404;
- next(err);
+ //next(err);
 };
 
 /*
