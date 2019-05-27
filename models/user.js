@@ -30,7 +30,7 @@ const bcrypt=require('bcryptjs');
 
 
 //this will take effect before save so that we can encrypt our password before saving into database
-//here this dont works properly therefore we use function keyword
+//here (this function) dont works properly therefore we use function keyword
 //and all async await function we need to keep in try catch
 userSchema.pre('save', async function (next){
 try{
