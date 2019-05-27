@@ -5,7 +5,7 @@ require('dotenv').config()//create private variables that u dont want to share o
 const express = require('express');
 //const port= 5000;   //
 const port= process.env.PORT; //it will take the PORT variable from .env
-
+//check out why env method not working with nodemon but working perfect with node index.js 
 const cors=require('cors');
 const bodyParser=require('body-parser');
 
