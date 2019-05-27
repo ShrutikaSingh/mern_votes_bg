@@ -1,3 +1,6 @@
+const jwt=require('jsonwebtoken');
+
+
 const db = require('../models');//before anything we will be needing our database
 //so we are using our db that will be asynchronous
 
@@ -30,11 +33,12 @@ exports.login= async (req,res,next) => {
         res.json({id,username});
     }
     else{ //if invalid
-        throw new Error('invalid username or password')
+        throw new Error();
     }
 
 
     }catch(err){
+        err.message='invalid username/Password';
         next(err);
     }
 }; //now go to postmane and check post for localhost:5000/api/auth/login
