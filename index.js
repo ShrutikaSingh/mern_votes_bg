@@ -1,5 +1,5 @@
 
-require('dotenv').config()//create private variables that u dont want to share on a website like github
+require('dotenv').config();//create private variables that u dont want to share on a website like github
 //create server
 
 const express = require('express');
@@ -29,7 +29,7 @@ app.use(handle.notFound);   //not found is coming from handler/index.js
 
 //app.use( handle.errors);    //this errorHandler errors is coming from handler/index.js//const port= process.env.PORT; //it will take the PORT variable from .env
 //getting error res.status is not a function
-app.listen(port, console.log(`server is listining to ${port}`)); //``backtick for template literals
+app.listen(process.env.PORT || 5000 , console.log(`server is listining to ${port}`)); //``backtick for template literals
 
 
 
