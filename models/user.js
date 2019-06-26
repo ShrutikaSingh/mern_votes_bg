@@ -35,7 +35,7 @@ const bcrypt=require('bcryptjs');
 userSchema.pre('save', async function (next){
 try{
     //if the password is no modified //if we are sending in correct password we r gonna check its correct or not
-    //and in the case if nothing is changed in the database of psswd we just sen dit to he next function
+    //and in the case if nothing is changed in the database of psswd we just send dat to next function
 if(!this.isModified('password')){
     return next();
 }
