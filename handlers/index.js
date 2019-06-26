@@ -9,11 +9,12 @@ module.exports = {
 module.exports.notFound=(res,req,next)=>{
  const err=new Error('not found');
  err.status=404;
- //next(err);
+ next(err);
 };
 
-/*
-we are getting error res.status is not a function
+
+
+//we are getting error res.status is not a function
 
 module.exports.errors = (err,res,req,next)=> {
     res.status(err.status || 400).json(               //500 for any diff error like our server is broken //400 is standard error code it means something went wrong
@@ -23,5 +24,5 @@ module.exports.errors = (err,res,req,next)=> {
     );
 
 };
-*/
+
 
