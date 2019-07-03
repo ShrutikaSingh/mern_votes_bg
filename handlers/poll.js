@@ -1,4 +1,4 @@
-//handlers/polls.js
+//handlers/poll.js
 
 //our handler is going to import database therefore import models
 const db=require('../models');
