@@ -14,11 +14,13 @@ router.route('/')
     .get(handle.showPolls)
     .post(auth,handle.createPolls);
 
-router.get('/user',auth,handle.userPolls);
+router.get('/user',auth,handle.userPolls); //localhost:3000/api/poll/user
 
 router
     .route('/:id')//to get the specific polls
-    .get()
+    .get(handle.getPoll)//localhost:3000/api/poll/enter_the_id_of_poll_here
+    .post()
     .delete()//to delete specific poll
+
 
 module.exports = router //exportinng router
