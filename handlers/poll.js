@@ -4,7 +4,8 @@ const db=require('../models');
 //use async await to show polls,**always use try catch in the async await
 exports.showPolls=async(req,res,next) => {
     try{
-        const polls= await db.Poll.find(); //find everything
+        
+        const polls= await db.Poll.find().populate('user',['username','id']); //populate here also//find everything //populate is how we use relation ships between differnt things (like here user and poll) in mongo
         res.status(200).json(polls)//200 for OK status and show the polls in json format
     }
     catch(err){
@@ -91,6 +92,22 @@ exports.vote= async(req,res,next)=>{
 
     catch(err){
         err.status=400;
+        next(err);
+    }
+}
+
+
+exports.getPoll=async(req,res,next)=>{
+    try{
+        const {id} = req.params; //coming from request parameter
+        const poll= await db.Poll.findById(id)
+            .populate('user',['username','id',]); //populate the user and we want username and the id
+        
+        if(!poll)throw new Error('Not Found'); //if the poll doest not exist 
+        return res.status(200).json(poll); //and respond with the poll
+    }
+    catch(err){
+        err.status=400,
         next(err);
     }
 }
