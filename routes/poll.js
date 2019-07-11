@@ -6,7 +6,19 @@ const router=require('express').Router();
 
 //router.route('/').get()//show every thing,initially it was this to show everything but now we have to crate a showpoll method in handlers/poll.js
 const handle=require('../handlers');
-router.route('/').get(handle.showPolls)
-.post(handle.createPolls);
+const auth=require('../middlewares/auth');
+
+
+
+router.route('/')
+    .get(handle.showPolls)
+    .post(auth,handle.createPolls);
+
+router.get('/user',auth,handle.userPolls);
+
+router
+    .route('/:id')//to get the specific polls
+    .get()
+    .delete()//to delete specific poll
 
 module.exports = router //exportinng router
