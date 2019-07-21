@@ -3,11 +3,13 @@ const mongoose = require ('mongoose');
 
 const optionSchema = new mongoose.Schema({
     option:String,
-    votes:{
+    votes:
+    {
         type:Number,
         default:0,
-    },
-});
+    },    
+}
+);
 
 const pollSchema = new mongoose.Schema({
     user: {
@@ -22,5 +24,7 @@ const pollSchema = new mongoose.Schema({
         default:Date.now,
     },
 });
+
+
 
 module.exports = mongoose.model('Poll', pollSchema);
