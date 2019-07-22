@@ -4,7 +4,6 @@ const db=require('../models');
 //use async await to show polls,**always use try catch in the async await
 exports.showPolls=async(req,res,next) => {
     try{
-        
         const polls= await db.Poll.find().populate('user',['username','id']); //populate here also//find everything //populate is how we use relation ships between differnt things (like here user and poll) in mongo
         res.status(200).json(polls)//200 for OK status and show the polls in json format
     }
@@ -19,13 +18,11 @@ exports.userPolls=async (req,res,next)=>{
         const {id} = req.decoded;
         const user = await db.User.findById(id)
             .populate('polls');//find that user and add the polls by them in their database
-        
             return res.status(200).json(user.polls);
     }
     catch(err){
         err.status=400;
         next(err);
-
     }
 }
 
@@ -66,7 +63,6 @@ exports.vote= async(req,res,next)=>{
         if(answer){
             const poll= await db.Poll.findById(pollId);
             if(!poll)throw new Error('No poll found from this user');
-
             const vote=poll.option.map(
                 option => option.option === answer 
                 ? {
@@ -82,14 +78,9 @@ exports.vote= async(req,res,next)=>{
                 'VOTE: vote filter',
                 poll.voted.filter(user => user.toString() === userId).length,
               );
-
         }
-        
-
-
 
     }
-
     catch(err){
         err.status=400;
         next(err);
@@ -110,4 +101,30 @@ exports.getPoll=async(req,res,next)=>{
         err.status=400,
         next(err);
     }
-}
+};
+
+exports.deletePoll= async (req,res,next)=>{
+    const {id:pollId} = req.params;
+    const {id:userId} = req.decoded;
+    try{
+        let user= await db.User.findById(userId)
+        if(user.polls){
+            user.polls = user.polls.filter(userPoll => {
+                return userPoll._id.toString() !== pollId.toString()
+            })
+        }
+        const poll = await db.Poll.findById(pollId);
+        if(!poll) throw new Error('No Poll Found');
+        if(poll.user.toString()!== userId){
+            throw new Error('Unauthorized access');
+        }
+        await user.save()
+        await poll.remove();
+        return res.status(202).json({poll,deleted:true});
+    }catch(err){
+        return next({
+            status:400,
+            message: err.message,
+        });
+    }
+};

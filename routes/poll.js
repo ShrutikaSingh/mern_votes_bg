@@ -8,10 +8,8 @@ const router=require('express').Router();
 const handle=require('../handlers');
 const auth=require('../middlewares/auth');
 
-
-
 router.route('/')
-    .get(handle.showPolls)
+    .get (handle.showPolls)
     .post(auth,handle.createPolls);
 
 router.get('/user',auth,handle.userPolls); //localhost:3000/api/poll/user
@@ -19,8 +17,10 @@ router.get('/user',auth,handle.userPolls); //localhost:3000/api/poll/user
 router
     .route('/:id')//to get the specific polls
     .get(handle.getPoll)//localhost:3000/api/poll/enter_the_id_of_poll_here
-    .post()
-    .delete()//to delete specific poll
+    .post(auth,handle.vote)
+    .delete(auth,handle.deletePoll)//to delete specific poll
 
 
 module.exports = router //exportinng router
+
+
