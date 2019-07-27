@@ -15,6 +15,8 @@ const handle=require('./handlers');  //start listing at /
 const routes=require('./routes');
 const app=express();
 
+
+const appointment_route=require('./routes/appointment');
 app.use(cors());    //initialise the middle wares that we installed
 app.use(bodyParser.json()); //initialise the middle wares body-parser that we installed
 
@@ -24,6 +26,8 @@ app.use('/api/auth',routes.auth);//sending all the route for this endpoint here 
 //go to postman to see the users  and post {"username":"ff","password":"ydfuesfrdttyefa"} to localhost:port_number/api/auth/login in the body
 //and localhost:5000/api/auth/register to register a new user  using new {"username":"tufdyhuetrtrehi","password":"ydfuesrttyefa"} and post
 app.use('/api/poll',routes.poll);
+app.use('/appointment',routes.appointment)
+
 
 app.use(handle.notFound);   //not found is coming from handler/index.js
 
